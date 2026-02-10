@@ -20,6 +20,7 @@
             background-image: url('https://i.hizliresim.com/tobt4hv.jpg');
             background-size: cover; background-position: center;
             background-attachment: fixed; background-repeat: no-repeat;
+            overflow-x: hidden; /* Kar tanelerinin sağa doğru taşmasını engellemek için */
         }
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -45,7 +46,7 @@
         .link-card i { font-size: 1.2rem; width: 28px; margin-right: 12px; }
         .link-text { flex-grow: 1; font-size: 0.95rem; text-align: left; }
         
-        .footer-section { margin-top: 40px; }
+        .footer-section { margin-top: 40px; position: relative; z-index: 2; }
         .footer-quote { font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); font-style: italic; margin-bottom: 15px; }
         .memory-img {
             width: 100px; height: 100px; border-radius: 15px;
@@ -59,6 +60,30 @@
             transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
         }
         .music-btn:hover { background: rgba(255,255,255,0.25); }
+
+        /* --- Kar Efekti CSS --- */
+        .snowflake {
+            color: #fff;
+            font-size: 1.2em;
+            position: fixed;
+            top: -10%;
+            z-index: 0; /* Butonların arkasında kalsın diye */
+            user-select: none;
+            cursor: default;
+            animation-name: snowflakes-fall, snowflakes-shake;
+            animation-duration: 10s, 3s;
+            animation-timing-function: linear, ease-in-out;
+            animation-iteration-count: infinite, infinite;
+            pointer-events: none; /* Kar tanesine tıklanmasın, butonlara engel olmasın */
+        }
+        @keyframes snowflakes-fall {
+            0% { top: -10%; }
+            100% { top: 100%; }
+        }
+        @keyframes snowflakes-shake {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(50px); }
+        }
     </style>
 </head>
 <body>
@@ -71,8 +96,8 @@
             <a href="https://www.instagram.com/ozgurbey_/" target="_blank" class="link-card"><i class="fa-brands fa-instagram"></i><span class="link-text">Instagram</span></a>
             <a href="https://x.com/exizmm" target="_blank" class="link-card"><i class="fa-brands fa-x-twitter"></i><span class="link-text">X / Twitter</span></a>
             <a href="https://youtube.com/@exizm" target="_blank" class="link-card"><i class="fa-brands fa-youtube"></i><span class="link-text">YouTube</span></a>
-            <a href="https://open.spotify.com/artist/1TFHIb9CdnlTV6SR4mDMtz?si=t22az3WbRFOONSG60L3CPg" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Artist)</span></a>
-            <a href="https://open.spotify.com/user/o56z5xxsxdjqna1pq47jd2rnn?si=zY7mMjucS829FiyLWLCs9g" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Profil)</span></a>
+            <a href="https://spotify.com" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Artist)</span></a>
+            <a href="https://spotify.com" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Profil)</span></a>
             <a href="mailto:iamozgur.gencay@gmail.com" class="link-card"><i class="fa-solid fa-envelope"></i><span class="link-text">E-Posta</span></a>
         </div>
 
@@ -90,6 +115,7 @@
     </div>
 
     <script>
+        // Müzik Kontrolü
         function toggleMusic() {
             var music = document.getElementById("bg-music");
             var btn = document.getElementById("music-btn");
@@ -101,6 +127,26 @@
                 btn.innerHTML = '<i class="fa-solid fa-play"></i> Müziği Başlat';
             }
         }
+
+        // Kar Taneleri Oluşturucu
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '•'; 
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 7 + 's';
+            snowflake.style.opacity = Math.random() * 0.7; // Çok parlak olmasın
+            snowflake.style.fontSize = Math.random() * 15 + 10 + 'px';
+
+            document.body.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 10000);
+        }
+
+        // Her 250ms'de bir yeni kar tanesi (Saniyede 4 tane)
+        setInterval(createSnowflake, 250);
     </script>
 </body>
 </html>
