@@ -28,36 +28,25 @@
         }
         .container { width: 100%; max-width: 400px; text-align: center; padding: 40px 20px; z-index: 1; }
         
-        /* --- Profil Resmi ve Işık Dalgaları --- */
-        .profile-wrapper {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 15px auto;
-        }
+        /* --- LED Efektli Profil Resmi --- */
         .profile-img {
-            width: 100%; height: 100%; border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            object-fit: cover;
-            position: relative; z-index: 2;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            width: 120px; height: 120px; border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px; object-fit: cover;
+            /* Beyaz LED Parlama Efekti */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            animation: led-glow 3s infinite ease-in-out;
         }
-        .pulse {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            z-index: 1;
-            animation: pulse-wave 3s infinite ease-out;
-        }
-        .pulse:nth-child(2) { animation-delay: 1s; }
-        .pulse:nth-child(3) { animation-delay: 2s; }
 
-        @keyframes pulse-wave {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-            100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+        @keyframes led-glow {
+            0%, 100% { 
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.3), inset 0 0 5px rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.4);
+            }
+            50% { 
+                box-shadow: 0 0 25px rgba(255, 255, 255, 0.9), inset 0 0 10px rgba(255, 255, 255, 0.4);
+                border-color: rgba(255, 255, 255, 1);
+            }
         }
 
         h1 { font-size: 1.8rem; margin: 10px 0 5px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
@@ -88,7 +77,7 @@
         }
         .music-btn:hover { background: rgba(255,255,255,0.25); }
 
-        /* --- Kar & Yıldız Efektleri CSS --- */
+        /* --- Kar & Yıldız Efektleri --- */
         .snowflake, .star, .shooting-star { position: fixed; pointer-events: none; z-index: 0; user-select: none; }
         .snowflake { color: #fff; font-size: 1.2em; top: -10%; animation: snowflakes-fall 10s linear infinite, snowflakes-shake 3s ease-in-out infinite; }
         .star { background: #fff; border-radius: 50%; opacity: 0; animation: twinkle 5s infinite ease-in-out alternate; }
@@ -102,11 +91,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="profile-wrapper">
-            <div class="pulse"></div>
-            <div class="pulse"></div>
-            <img src="https://i.hizliresim.com/9ejgest.jpg" alt="Özgür Gencay" class="profile-img">
-        </div>
+        <img src="https://i.hizliresim.com/9ejgest.jpg" alt="Özgür Gencay" class="profile-img">
 
         <h1>Özgür Gencay</h1>
         <p class="description">Kullandığım tüm sosyal medya hesapları</p>
@@ -115,8 +100,8 @@
             <a href="https://www.instagram.com/ozgurbey_/" target="_blank" class="link-card"><i class="fa-brands fa-instagram"></i><span class="link-text">Instagram</span></a>
             <a href="https://x.com/exizmm" target="_blank" class="link-card"><i class="fa-brands fa-x-twitter"></i><span class="link-text">X / Twitter</span></a>
             <a href="https://youtube.com/@exizm" target="_blank" class="link-card"><i class="fa-brands fa-youtube"></i><span class="link-text">YouTube</span></a>
-            <a href="https://open.spotify.com/artist/0" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Artist)</span></a>
-            <a href="https://open.spotify.com/user/1" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Profil)</span></a>
+            <a href="https://open.spotify.com/artist/your_id" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Artist)</span></a>
+            <a href="https://open.spotify.com/user/your_id" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Profil)</span></a>
             <a href="mailto:iamozgur.gencay@gmail.com" class="link-card"><i class="fa-solid fa-envelope"></i><span class="link-text">E-Posta</span></a>
         </div>
 
