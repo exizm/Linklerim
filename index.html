@@ -160,4 +160,21 @@
             star.style.left = Math.random() * 100 + 'vw';
             star.style.top = Math.random() * 100 + 'vh';
             star.style.animationDuration = Math.random() * 2 + 3 + 's';
-            document.
+            document.body.appendChild(star);
+            setTimeout(() => { star.remove(); }, 6000);
+        }
+        setInterval(createStar, 600);
+
+        // Kayan Yıldız (10-20 saniyede bir bir tane kayar)
+        function createShootingStar() {
+            const sStar = document.createElement('div');
+            sStar.classList.add('shooting-star');
+            sStar.style.left = Math.random() * 70 + 'vw';
+            sStar.style.top = Math.random() * 30 + 'vh';
+            document.body.appendChild(sStar);
+            setTimeout(() => { sStar.remove(); }, 3000);
+        }
+        setInterval(createShootingStar, Math.random() * 10000 + 10000);
+    </script>
+</body>
+</html>
