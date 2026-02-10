@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Özgür Gencay | Bağlantılar</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
             --bg-color: #0d1117; 
@@ -20,16 +20,11 @@
             display: flex;
             justify-content: center;
             min-height: 100vh;
-            padding: 50px 20px;
+            padding: 40px 20px;
         }
-        .container {
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
+        .container { width: 100%; max-width: 400px; text-align: center; }
         .profile-img {
-            width: 110px;
-            height: 110px;
+            width: 110px; height: 110px;
             border-radius: 50%;
             border: 2px solid #334155;
             margin-bottom: 15px;
@@ -37,79 +32,81 @@
             background: #1e293b;
         }
         h1 { font-size: 1.6rem; margin: 10px 0 5px 0; font-weight: 700; color: #fff; }
-        .description {
-            font-size: 0.9rem;
-            color: #94a3b8;
-            margin-bottom: 35px;
-        }
-        .links-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+        .description { font-size: 0.9rem; color: #94a3b8; margin-bottom: 30px; }
+        .links-container { display: flex; flex-direction: column; gap: 14px; }
         .link-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 100px;
-            padding: 18px 25px;
+            padding: 16px 22px;
             display: flex;
             align-items: center;
             text-decoration: none;
             color: white;
             transition: all 0.2s ease;
         }
-        .link-card:active {
-            transform: scale(0.96);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .link-card i {
-            font-size: 1.3rem;
-            width: 30px;
-            margin-right: 15px;
-        }
-        .link-text {
-            flex-grow: 1;
-            font-size: 1rem;
-            font-weight: 500;
-            text-align: left;
-        }
-        .dots {
-            color: #475569;
-            font-size: 1.2rem;
+        .link-card:active { transform: scale(0.97); background: rgba(255, 255, 255, 0.1); }
+        .link-card i { font-size: 1.2rem; width: 28px; margin-right: 12px; color: #fff; }
+        .link-text { flex-grow: 1; font-size: 0.95rem; font-weight: 500; text-align: left; }
+        .sub-text { font-size: 0.8rem; color: #8b949e; margin-left: 4px; }
+        .dots { color: #475569; font-size: 1.1rem; }
+        
+        /* Eklediğimiz o özel söz için stil */
+        .footer-quote {
+            margin-top: 50px;
+            font-size: 0.85rem;
+            color: #4b5563;
+            font-style: italic;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="https://via.placeholder.com/150" alt="Özgür Gencay" class="profile-img">
+        <img src="https://via.placeholder.com/150/1e293b/ffffff?text=ÖG" alt="Özgür Gencay" class="profile-img">
         <h1>Özgür Gencay</h1>
         <p class="description">Kullandığım tüm sosyal medya hesapları</p>
+        
         <div class="links-container">
             <a href="https://www.instagram.com/ozgurbey_?igsh=MWNmdWptcDVtOHE3dA==" target="_blank" class="link-card">
-                <i class="fab fa-instagram"></i>
+                <i class="fa-brands fa-instagram"></i>
                 <span class="link-text">Instagram</span>
                 <span class="dots">⋮</span>
             </a>
+
             <a href="https://x.com/exizmm" target="_blank" class="link-card">
-                <i class="fab fa-x-twitter"></i>
+                <i class="fa-brands fa-x-twitter"></i>
                 <span class="link-text">X / Twitter</span>
                 <span class="dots">⋮</span>
             </a>
+
             <a href="https://youtube.com/@exizm?si=OOkMrChUOA00vqt_" target="_blank" class="link-card">
-                <i class="fab fa-youtube"></i>
+                <i class="fa-brands fa-youtube"></i>
                 <span class="link-text">YouTube</span>
                 <span class="dots">⋮</span>
             </a>
-            <a href="https://spotify.com" target="_blank" class="link-card">
-                <i class="fab fa-spotify"></i>
-                <span class="link-text">Spotify</span>
+
+            <a href="http://googleusercontent.com/spotify.com/7" target="_blank" class="link-card">
+                <i class="fa-brands fa-spotify"></i>
+                <span class="link-text">Spotify <span class="sub-text">(Artist hesabım)</span></span>
                 <span class="dots">⋮</span>
             </a>
+
+            <a href="http://googleusercontent.com/spotify.com/8" target="_blank" class="link-card">
+                <i class="fa-brands fa-spotify"></i>
+                <span class="link-text">Spotify <span class="sub-text">(Profilim)</span></span>
+                <span class="dots">⋮</span>
+            </a>
+
             <a href="mailto:iamozgur.gencay@gmail.com" class="link-card">
-                <i class="fas fa-envelope"></i>
+                <i class="fa-solid fa-envelope"></i>
                 <span class="link-text">E-Posta Gönder</span>
                 <span class="dots">⋮</span>
             </a>
+        </div>
+
+        <div class="footer-quote">
+            “Uykusuz bir gecenin sabahı”
         </div>
     </div>
 </body>
