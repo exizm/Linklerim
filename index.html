@@ -12,83 +12,54 @@
             --border-color: rgba(255, 255, 255, 0.1);
         }
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: -apple-system, system-ui, sans-serif;
             color: var(--text-color);
-            display: flex;
-            justify-content: center;
+            display: flex; justify-content: center;
             min-height: 100vh;
-            padding: 40px 20px;
             background-image: url('https://i.hizliresim.com/tobt4hv.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
+            background-size: cover; background-position: center;
+            background-attachment: fixed; background-repeat: no-repeat;
         }
         body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: -1;
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); z-index: -1;
         }
-        .container { 
-            width: 100%; 
-            max-width: 400px; 
-            text-align: center; 
-            padding: 50px 20px;
-            z-index: 1;
-        }
+        .container { width: 100%; max-width: 400px; text-align: center; padding: 40px 20px; z-index: 1; }
         .profile-img {
-            width: 120px; height: 120px;
-            border-radius: 50%;
+            width: 120px; height: 120px; border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            margin-bottom: 15px;
-            object-fit: cover;
+            margin-bottom: 15px; object-fit: cover;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-        h1 { font-size: 1.8rem; margin: 10px 0 5px 0; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .description { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 35px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-        .links-container { display: flex; flex-direction: column; gap: 15px; }
+        h1 { font-size: 1.8rem; margin: 10px 0 5px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .description { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 30px; }
+        .links-container { display: flex; flex-direction: column; gap: 12px; }
         .link-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 100px;
-            padding: 16px 25px;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: white;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 100px; padding: 14px 22px;
+            display: flex; align-items: center; text-decoration: none; color: white;
+            backdrop-filter: blur(8px); transition: all 0.3s ease;
         }
-        .link-card:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.5); }
-        .link-card i { font-size: 1.3rem; width: 30px; margin-right: 12px; }
-        .link-text { flex-grow: 1; font-size: 1rem; font-weight: 500; text-align: left; }
-        .sub-text { font-size: 0.8rem; opacity: 0.7; margin-left: 5px; }
-        .dots { opacity: 0.5; font-size: 1.2rem; }
+        .link-card:active { transform: scale(0.97); }
+        .link-card i { font-size: 1.2rem; width: 28px; margin-right: 12px; }
+        .link-text { flex-grow: 1; font-size: 0.95rem; text-align: left; }
         
-        .footer-quote {
-            margin-top: 60px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
-            font-style: italic;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-            display: flex; /* Sözü ve resmi yan yana almak için */
-            flex-direction: column; /* Alt alta sıralamak için */
-            align-items: center; /* Ortalamak için */
-            gap: 15px; /* Aralarına boşluk bırakmak için */
+        /* Özel Fotoğraf ve Müzik Bölümü */
+        .footer-section { margin-top: 40px; }
+        .footer-quote { font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); font-style: italic; margin-bottom: 15px; }
+        .memory-img {
+            width: 100px; height: 100px; border-radius: 15px;
+            object-fit: cover; border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
-        .quote-image {
-            width: 100px; /* Resmin boyutu */
-            height: 100px;
-            border-radius: 10px; /* Hafif oval köşeler */
-            object-fit: cover;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+        .music-btn {
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+            color: white; border-radius: 50px; padding: 10px 20px;
+            cursor: pointer; backdrop-filter: blur(5px); font-size: 0.85rem;
+            transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
         }
+        .music-btn:hover { background: rgba(255,255,255,0.25); }
     </style>
 </head>
 <body>
@@ -98,47 +69,39 @@
         <p class="description">Kullandığım tüm sosyal medya hesapları</p>
         
         <div class="links-container">
-            <a href="https://www.instagram.com/ozgurbey_/" target="_blank" class="link-card">
-                <i class="fa-brands fa-instagram"></i>
-                <span class="link-text">Instagram</span>
-                <span class="dots">⋮</span>
-            </a>
-
-            <a href="https://x.com/exizmm" target="_blank" class="link-card">
-                <i class="fa-brands fa-x-twitter"></i>
-                <span class="link-text">X / Twitter</span>
-                <span class="dots">⋮</span>
-            </a>
-
-            <a href="https://youtube.com/@exizm" target="_blank" class="link-card">
-                <i class="fa-brands fa-youtube"></i>
-                <span class="link-text">YouTube</span>
-                <span class="dots">⋮</span>
-            </a>
-
-            <a href="https://open.spotify.com" target="_blank" class="link-card">
-                <i class="fa-brands fa-spotify"></i>
-                <span class="link-text">Spotify <span class="sub-text">(Artist hesabım)</span></span>
-                <span class="dots">⋮</span>
-            </a>
-
-            <a href="https://open.spotify.com" target="_blank" class="link-card">
-                <i class="fa-brands fa-spotify"></i>
-                <span class="link-text">Spotify <span class="sub-text">(Profilim)</span></span>
-                <span class="dots">⋮</span>
-            </a>
-
-            <a href="mailto:iamozgur.gencay@gmail.com" class="link-card">
-                <i class="fa-solid fa-envelope"></i>
-                <span class="link-text">E-Posta Gönder</span>
-                <span class="dots">⋮</span>
-            </a>
+            <a href="https://www.instagram.com/ozgurbey_/" target="_blank" class="link-card"><i class="fa-brands fa-instagram"></i><span class="link-text">Instagram</span></a>
+            <a href="https://x.com/exizmm" target="_blank" class="link-card"><i class="fa-brands fa-x-twitter"></i><span class="link-text">X / Twitter</span></a>
+            <a href="https://youtube.com/@exizm" target="_blank" class="link-card"><i class="fa-brands fa-youtube"></i><span class="link-text">YouTube</span></a>
+            <a href="https://open.spotify.com/artist/YOUR_ID" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Artist)</span></a>
+            <a href="https://open.spotify.com/user/YOUR_ID" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Profil)</span></a>
+            <a href="mailto:iamozgur.gencay@gmail.com" class="link-card"><i class="fa-solid fa-envelope"></i><span class="link-text">E-Posta</span></a>
         </div>
 
-        <div class="footer-quote">
-            “Uykusuz bir gecenin sabahı”
-            <img src="https://i.hizliresim.com/kb8ersk.jpg" alt="Ek resim" class="quote-image">
+        <div class="footer-section">
+            <div class="footer-quote">“Uykusuz bir gecenin sabahı”</div>
+            <img src="https://i.hizliresim.com/kb8ersk.jpg" alt="Memory" class="memory-img">
+            <br>
+            <audio id="bg-music" loop>
+                <source src="https://www.mboxdrive.com/Strangers%20on%20a%20Train%20-%20The%20Jungle%20Is%20My%20Home.mp3" type="audio/mpeg">
+            </audio>
+            <button onclick="toggleMusic()" id="music-btn" class="music-btn">
+                <i class="fa-solid fa-play"></i> Atmosferi Başlat
+            </button>
         </div>
     </div>
+
+    <script>
+        function toggleMusic() {
+            var music = document.getElementById("bg-music");
+            var btn = document.getElementById("music-btn");
+            if (music.paused) {
+                music.play();
+                btn.innerHTML = '<i class="fa-solid fa-pause"></i> Müziği Durdur';
+            } else {
+                music.pause();
+                btn.innerHTML = '<i class="fa-solid fa-play"></i> Atmosferi Başlat';
+            }
+        }
+    </script>
 </body>
 </html>
