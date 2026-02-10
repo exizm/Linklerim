@@ -45,7 +45,6 @@
         .link-card i { font-size: 1.2rem; width: 28px; margin-right: 12px; }
         .link-text { flex-grow: 1; font-size: 0.95rem; text-align: left; }
         
-        /* Özel Fotoğraf ve Müzik Bölümü */
         .footer-section { margin-top: 40px; }
         .footer-quote { font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); font-style: italic; margin-bottom: 15px; }
         .memory-img {
@@ -72,8 +71,8 @@
             <a href="https://www.instagram.com/ozgurbey_/" target="_blank" class="link-card"><i class="fa-brands fa-instagram"></i><span class="link-text">Instagram</span></a>
             <a href="https://x.com/exizmm" target="_blank" class="link-card"><i class="fa-brands fa-x-twitter"></i><span class="link-text">X / Twitter</span></a>
             <a href="https://youtube.com/@exizm" target="_blank" class="link-card"><i class="fa-brands fa-youtube"></i><span class="link-text">YouTube</span></a>
-            <a href="https://open.spotify.com/artist/YOUR_ID" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Artist)</span></a>
-            <a href="https://open.spotify.com/user/YOUR_ID" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Profil)</span></a>
+            <a href="https://open.spotify.com/artist/6v8y6pT9XW0zN6u1ZJ0Z0Z" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Artist)</span></a>
+            <a href="https://open.spotify.com/user/ozgurgencay" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Profil)</span></a>
             <a href="mailto:iamozgur.gencay@gmail.com" class="link-card"><i class="fa-solid fa-envelope"></i><span class="link-text">E-Posta</span></a>
         </div>
 
@@ -81,11 +80,11 @@
             <div class="footer-quote">“Uykusuz bir gecenin sabahı”</div>
             <img src="https://i.hizliresim.com/kb8ersk.jpg" alt="Memory" class="memory-img">
             <br>
-            <audio id="bg-music" loop>
-                <source src="https://www.mboxdrive.com/Strangers%20on%20a%20Train%20-%20The%20Jungle%20Is%20My%20Home.mp3" type="audio/mpeg">
+            <audio id="bg-music" loop preload="auto">
+                <source src="sarki.mp3" type="audio/mpeg">
             </audio>
             <button onclick="toggleMusic()" id="music-btn" class="music-btn">
-                <i class="fa-solid fa-play"></i> Atmosferi Başlat
+                <i class="fa-solid fa-play"></i> Müziği Başlat
             </button>
         </div>
     </div>
@@ -99,7 +98,7 @@
                 btn.innerHTML = '<i class="fa-solid fa-pause"></i> Müziği Durdur';
             } else {
                 music.pause();
-                btn.innerHTML = '<i class="fa-solid fa-play"></i> Atmosferi Başlat';
+                btn.innerHTML = '<i class="fa-solid fa-play"></i> Müziği Başlat';
             }
         }
     </script>
