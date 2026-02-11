@@ -8,7 +8,7 @@
     <style>
         :root {
             --text-color: #f8fafc;
-            --card-bg: rgba(0, 0, 0, 0.4); 
+            --card-bg: rgba(255, 255, 255, 0.05); /* Baloncuk içini iyice saydamlaştırdım */
             --border-color: rgba(255, 255, 255, 0.1);
         }
         body {
@@ -24,7 +24,7 @@
         }
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5); z-index: -1;
+            background: rgba(0, 0, 0, 0.4); z-index: -1; /* Arkayı çok az kararttım ki kar taneleri görünsün */
         }
         .container { width: 100%; max-width: 400px; text-align: center; padding: 40px 20px; z-index: 1; }
         
@@ -33,34 +33,57 @@
             width: 120px; height: 120px; border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.8);
             margin-bottom: 15px; object-fit: cover;
-            /* Beyaz LED Parlama Efekti */
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
             animation: led-glow 3s infinite ease-in-out;
         }
-
         @keyframes led-glow {
-            0%, 100% { 
-                box-shadow: 0 0 5px rgba(255, 255, 255, 0.3), inset 0 0 5px rgba(255, 255, 255, 0.2);
-                border-color: rgba(255, 255, 255, 0.4);
-            }
-            50% { 
-                box-shadow: 0 0 25px rgba(255, 255, 255, 0.9), inset 0 0 10px rgba(255, 255, 255, 0.4);
-                border-color: rgba(255, 255, 255, 1);
-            }
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); border-color: rgba(255, 255, 255, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 1); }
         }
 
-        h1 { font-size: 1.8rem; margin: 10px 0 5px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .description { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 30px; }
-        .links-container { display: flex; flex-direction: column; gap: 12px; }
+        /* --- Saydam ve Yılan LED'li Link Balonları --- */
+        .links-container { display: flex; flex-direction: column; gap: 15px; }
+        
         .link-card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 100px; padding: 14px 22px;
-            display: flex; align-items: center; text-decoration: none; color: white;
-            backdrop-filter: blur(8px); transition: all 0.3s ease;
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 100px;
+            padding: 14px 22px;
+            display: flex; align-items: center;
+            text-decoration: none; color: white;
+            overflow: hidden;
+            backdrop-filter: blur(3px); /* Arkadaki resmi çok az yumuşatır ki yazılar kaybolmasın */
+            transition: all 0.3s ease;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .link-card:active { transform: scale(0.97); }
-        .link-card i { font-size: 1.2rem; width: 28px; margin-right: 12px; }
-        .link-text { flex-grow: 1; font-size: 0.95rem; text-align: left; }
+
+        /* Dönen Işık (Yılan) */
+        .link-card::before {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, rgba(255, 255, 255, 0.8));
+            animation: rotate-led 4s linear infinite;
+            z-index: -2;
+        }
+
+        /* İç Katman (Saydamlık Ayarı) */
+        .link-card::after {
+            content: "";
+            position: absolute;
+            inset: 1px; /* LED çizgisini daha da incelttim */
+            background: rgba(0, 0, 0, 0.3); /* Burası baloncukların iç koyuluğu, saydam bıraktım */
+            border-radius: 100px;
+            z-index: -1;
+        }
+
+        @keyframes rotate-led { 100% { transform: rotate(360deg); } }
+
+        .link-card:active { transform: scale(0.95); }
+        .link-card i { font-size: 1.2rem; width: 28px; margin-right: 12px; z-index: 2; text-shadow: 0 0 5px #000; }
+        .link-text { flex-grow: 1; font-size: 0.95rem; text-align: left; z-index: 2; font-weight: 500; text-shadow: 0 0 5px #000; }
         
         .footer-section { margin-top: 40px; position: relative; z-index: 2; }
         .footer-quote { font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); font-style: italic; margin-bottom: 15px; }
@@ -70,12 +93,11 @@
             margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
         .music-btn {
-            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
             color: white; border-radius: 50px; padding: 10px 20px;
             cursor: pointer; backdrop-filter: blur(5px); font-size: 0.85rem;
             transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
         }
-        .music-btn:hover { background: rgba(255,255,255,0.25); }
 
         /* --- Kar & Yıldız Efektleri --- */
         .snowflake, .star, .shooting-star { position: fixed; pointer-events: none; z-index: 0; user-select: none; }
@@ -100,8 +122,8 @@
             <a href="https://www.instagram.com/ozgurbey_/" target="_blank" class="link-card"><i class="fa-brands fa-instagram"></i><span class="link-text">Instagram</span></a>
             <a href="https://x.com/exizmm" target="_blank" class="link-card"><i class="fa-brands fa-x-twitter"></i><span class="link-text">X / Twitter</span></a>
             <a href="https://youtube.com/@exizm" target="_blank" class="link-card"><i class="fa-brands fa-youtube"></i><span class="link-text">YouTube</span></a>
-            <a href="https://open.spotify.com/artist/your_id" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Artist)</span></a>
-            <a href="https://open.spotify.com/user/your_id" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Profil)</span></a>
+            <a href="#" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Artist)</span></a>
+            <a href="#" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Profil)</span></a>
             <a href="mailto:iamozgur.gencay@gmail.com" class="link-card"><i class="fa-solid fa-envelope"></i><span class="link-text">E-Posta</span></a>
         </div>
 
@@ -148,16 +170,4 @@
             document.body.appendChild(star);
             setTimeout(() => { star.remove(); }, 6000);
         }
-        setInterval(createStar, 600);
-
-        function createShootingStar() {
-            const sStar = document.createElement('div');
-            sStar.classList.add('shooting-star');
-            sStar.style.left = Math.random() * 70 + 'vw'; sStar.style.top = Math.random() * 30 + 'vh';
-            document.body.appendChild(sStar);
-            setTimeout(() => { sStar.remove(); }, 3000);
-        }
-        setInterval(createShootingStar, 15000);
-    </script>
-</body>
-</html>
+        setInterval(createStar,
