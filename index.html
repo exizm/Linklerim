@@ -8,7 +8,8 @@
     <style>
         :root {
             --text-color: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.05); 
+            --card-bg: rgba(0, 0, 0, 0.4); 
+            --border-color: rgba(255, 255, 255, 0.1);
         }
         body {
             margin: 0; padding: 0;
@@ -23,84 +24,75 @@
         }
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4); z-index: -1;
+            background: rgba(0, 0, 0, 0.5); z-index: -1;
         }
-        .container { width: 100%; max-width: 400px; text-align: center; padding: 40px 20px; z-index: 10; }
+        .container { width: 100%; max-width: 400px; text-align: center; padding: 40px 20px; z-index: 1; }
         
         /* --- LED Efektli Profil Resmi --- */
         .profile-img {
             width: 120px; height: 120px; border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.8);
             margin-bottom: 15px; object-fit: cover;
+            /* Beyaz LED Parlama Efekti */
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
             animation: led-glow 3s infinite ease-in-out;
         }
+
         @keyframes led-glow {
-            0%, 100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); border-color: rgba(255, 255, 255, 0.4); }
-            50% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 1); }
+            0%, 100% { 
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.3), inset 0 0 5px rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.4);
+            }
+            50% { 
+                box-shadow: 0 0 25px rgba(255, 255, 255, 0.9), inset 0 0 10px rgba(255, 255, 255, 0.4);
+                border-color: rgba(255, 255, 255, 1);
+            }
         }
 
-        /* --- Yılan Gibi Dönen LED Baloncuklar --- */
-        .links-container { display: flex; flex-direction: column; gap: 15px; }
-        
+        h1 { font-size: 1.8rem; margin: 10px 0 5px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .description { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 30px; }
+        .links-container { display: flex; flex-direction: column; gap: 12px; }
         .link-card {
-            position: relative;
-            background: var(--card-bg);
-            border-radius: 100px;
-            padding: 14px 22px;
-            display: flex; align-items: center;
-            text-decoration: none; color: white;
-            overflow: hidden;
-            backdrop-filter: blur(5px);
-            z-index: 1;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 100px; padding: 14px 22px;
+            display: flex; align-items: center; text-decoration: none; color: white;
+            backdrop-filter: blur(8px); transition: all 0.3s ease;
         }
-
-        /* Yılan gibi dönen ışık */
-        .link-card::before {
-            content: "";
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: conic-gradient(transparent, transparent, transparent, rgba(255, 255, 255, 0.9));
-            animation: rotate-led 3s linear infinite;
-            z-index: -2;
-        }
-
-        /* İç saydam katman */
-        .link-card::after {
-            content: "";
-            position: absolute;
-            inset: 2px;
-            background: rgba(0, 0, 0, 0.4); /* Resim görünsün diye saydam */
-            border-radius: 100px;
-            z-index: -1;
-        }
-
-        @keyframes rotate-led { 100% { transform: rotate(360deg); } }
-
-        .link-card i { font-size: 1.2rem; width: 28px; margin-right: 12px; z-index: 2; }
-        .link-text { flex-grow: 1; font-size: 0.95rem; text-align: left; z-index: 2; font-weight: 500; }
+        .link-card:active { transform: scale(0.97); }
+        .link-card i { font-size: 1.2rem; width: 28px; margin-right: 12px; }
+        .link-text { flex-grow: 1; font-size: 0.95rem; text-align: left; }
         
-        .footer-section { margin-top: 40px; position: relative; z-index: 20; }
+        .footer-section { margin-top: 40px; position: relative; z-index: 2; }
         .footer-quote { font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); font-style: italic; margin-bottom: 15px; }
-        .memory-img { width: 100px; height: 100px; border-radius: 15px; object-fit: cover; margin-bottom: 20px; }
-        .music-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 50px; padding: 10px 20px; cursor: pointer; }
+        .memory-img {
+            width: 100px; height: 100px; border-radius: 15px;
+            object-fit: cover; border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .music-btn {
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+            color: white; border-radius: 50px; padding: 10px 20px;
+            cursor: pointer; backdrop-filter: blur(5px); font-size: 0.85rem;
+            transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .music-btn:hover { background: rgba(255,255,255,0.25); }
 
-        /* --- Efektler --- */
+        /* --- Kar & Yıldız Efektleri --- */
         .snowflake, .star, .shooting-star { position: fixed; pointer-events: none; z-index: 0; user-select: none; }
         .snowflake { color: #fff; font-size: 1.2em; top: -10%; animation: snowflakes-fall 10s linear infinite, snowflakes-shake 3s ease-in-out infinite; }
         .star { background: #fff; border-radius: 50%; opacity: 0; animation: twinkle 5s infinite ease-in-out alternate; }
-        .shooting-star { width: 2px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1)); opacity: 0; animation: shoot 2s linear forwards; }
+        .shooting-star { width: 2px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.8)); opacity: 0; animation: shoot 2.5s linear forwards; }
 
         @keyframes snowflakes-fall { 0% { top: -10%; } 100% { top: 100%; } }
         @keyframes snowflakes-shake { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(50px); } }
-        @keyframes twinkle { 0% { opacity: 0; transform: scale(0.5); } 50% { opacity: 0.8; transform: scale(1); } 100% { opacity: 0; transform: scale(0.5); } }
+        @keyframes twinkle { 0% { opacity: 0; transform: scale(0.5); } 50% { opacity: 0.8; transform: scale(1.1); } 100% { opacity: 0; transform: scale(0.5); } }
         @keyframes shoot { 0% { transform: translate(0, 0) rotate(45deg); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(400px, 400px) rotate(45deg); opacity: 0; } }
     </style>
 </head>
 <body>
     <div class="container">
         <img src="https://i.hizliresim.com/9ejgest.jpg" alt="Özgür Gencay" class="profile-img">
+
         <h1>Özgür Gencay</h1>
         <p class="description">Kullandığım tüm sosyal medya hesapları</p>
         
@@ -108,8 +100,8 @@
             <a href="https://www.instagram.com/ozgurbey_/" target="_blank" class="link-card"><i class="fa-brands fa-instagram"></i><span class="link-text">Instagram</span></a>
             <a href="https://x.com/exizmm" target="_blank" class="link-card"><i class="fa-brands fa-x-twitter"></i><span class="link-text">X / Twitter</span></a>
             <a href="https://youtube.com/@exizm" target="_blank" class="link-card"><i class="fa-brands fa-youtube"></i><span class="link-text">YouTube</span></a>
-            <a href="#" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Artist)</span></a>
-            <a href="#" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Profil)</span></a>
+            <a href="https://open.spotify.com/artist/1TFHIb9CdnlTV6SR4mDMtz?si=ycgSIDcFQDCjr7zU8d9ZmQ" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Artist)</span></a>
+            <a href="https://open.spotify.com/user/o56z5xxsxdjqna1pq47jd2rnn?si=PQQX9W66QG2rpooi4AH1vg" target="_blank" class="link-card"><i class="fa-brands fa-spotify"></i><span class="link-text">Spotify (Profil)</span></a>
             <a href="mailto:iamozgur.gencay@gmail.com" class="link-card"><i class="fa-solid fa-envelope"></i><span class="link-text">E-Posta</span></a>
         </div>
 
@@ -117,41 +109,55 @@
             <div class="footer-quote">“Uykusuz bir gecenin sabahı”</div>
             <img src="https://i.hizliresim.com/kb8ersk.jpg" alt="Memory" class="memory-img">
             <br>
-            <audio id="bg-music" loop><source src="sarki.mp3" type="audio/mpeg"></audio>
-            <button onclick="toggleMusic()" id="music-btn" class="music-btn"><i class="fa-solid fa-play"></i> Müziği Başlat</button>
+            <audio id="bg-music" loop preload="auto">
+                <source src="sarki.mp3" type="audio/mpeg">
+            </audio>
+            <button onclick="toggleMusic()" id="music-btn" class="music-btn">
+                <i class="fa-solid fa-play"></i> Müziği Başlat
+            </button>
         </div>
     </div>
 
     <script>
         function toggleMusic() {
-            var m = document.getElementById("bg-music");
-            var b = document.getElementById("music-btn");
-            if (m.paused) { m.play(); b.innerHTML = '<i class="fa-solid fa-pause"></i> Müziği Durdur'; }
-            else { m.pause(); b.innerHTML = '<i class="fa-solid fa-play"></i> Müziği Başlat'; }
+            var music = document.getElementById("bg-music");
+            var btn = document.getElementById("music-btn");
+            if (music.paused) { music.play(); btn.innerHTML = '<i class="fa-solid fa-pause"></i> Müziği Durdur'; }
+            else { music.pause(); btn.innerHTML = '<i class="fa-solid fa-play"></i> Müziği Başlat'; }
         }
 
         function createSnowflake() {
-            const s = document.createElement('div'); s.classList.add('snowflake'); s.innerHTML = '•'; 
-            s.style.left = Math.random() * 100 + 'vw'; s.style.animationDuration = Math.random() * 3 + 7 + 's';
-            s.style.opacity = Math.random() * 0.7; document.body.appendChild(s);
-            setTimeout(() => { s.remove(); }, 10000);
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake'); snowflake.innerHTML = '•'; 
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 7 + 's';
+            snowflake.style.opacity = Math.random() * 0.7;
+            snowflake.style.fontSize = Math.random() * 15 + 10 + 'px';
+            document.body.appendChild(snowflake);
+            setTimeout(() => { snowflake.remove(); }, 10000);
         }
         setInterval(createSnowflake, 250);
 
         function createStar() {
-            const st = document.createElement('div'); st.classList.add('star');
-            const size = Math.random() * 3 + 1 + 'px'; st.style.width = size; st.style.height = size;
-            st.style.left = Math.random() * 100 + 'vw'; st.style.top = Math.random() * 100 + 'vh';
-            document.body.appendChild(st); setTimeout(() => { st.remove(); }, 5000);
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const size = Math.random() * 3 + 1 + 'px';
+            star.style.width = size; star.style.height = size;
+            star.style.left = Math.random() * 100 + 'vw'; star.style.top = Math.random() * 100 + 'vh';
+            star.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(star);
+            setTimeout(() => { star.remove(); }, 6000);
         }
-        setInterval(createStar, 700);
+        setInterval(createStar, 600);
 
         function createShootingStar() {
-            const ss = document.createElement('div'); ss.classList.add('shooting-star');
-            ss.style.left = Math.random() * 70 + 'vw'; ss.style.top = Math.random() * 30 + 'vh';
-            document.body.appendChild(ss); setTimeout(() => { ss.remove(); }, 2000);
+            const sStar = document.createElement('div');
+            sStar.classList.add('shooting-star');
+            sStar.style.left = Math.random() * 70 + 'vw'; sStar.style.top = Math.random() * 30 + 'vh';
+            document.body.appendChild(sStar);
+            setTimeout(() => { sStar.remove(); }, 3000);
         }
-        setInterval(createShootingStar, 12000);
+        setInterval(createShootingStar, 15000);
     </script>
 </body>
 </html>
