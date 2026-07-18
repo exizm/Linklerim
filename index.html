@@ -8,8 +8,7 @@
     <style>
         :root {
             --text-color: #f8fafc;
-            --card-bg: rgba(0, 0, 0, 0.4); 
-            --border-color: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.03); /* İç kısmı tamamen saydamlaştırdık */
         }
         body {
             margin: 0; padding: 0;
@@ -24,60 +23,87 @@
         }
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5); z-index: -1;
+            background: rgba(0, 0, 0, 0.35); z-index: -1; /* Arka plan tilkisi netleşsin diye karartmayı azalttım */
         }
-        .container { width: 100%; max-width: 400px; text-align: center; padding: 40px 20px; z-index: 1; }
+        .container { width: 100%; max-width: 400px; text-align: center; padding: 40px 20px; z-index: 10; }
         
         /* --- LED Efektli Profil Resmi --- */
         .profile-img {
             width: 120px; height: 120px; border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.8);
             margin-bottom: 15px; object-fit: cover;
-            /* Beyaz LED Parlama Efekti */
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
             animation: led-glow 3s infinite ease-in-out;
         }
-
         @keyframes led-glow {
-            0%, 100% { 
-                box-shadow: 0 0 5px rgba(255, 255, 255, 0.3), inset 0 0 5px rgba(255, 255, 255, 0.2);
-                border-color: rgba(255, 255, 255, 0.4);
-            }
-            50% { 
-                box-shadow: 0 0 25px rgba(255, 255, 255, 0.9), inset 0 0 10px rgba(255, 255, 255, 0.4);
-                border-color: rgba(255, 255, 255, 1);
-            }
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); border-color: rgba(255, 255, 255, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.9); border-color: rgba(255, 255, 255, 1); }
         }
 
-        h1 { font-size: 1.8rem; margin: 10px 0 5px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .description { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 30px; }
-        .links-container { display: flex; flex-direction: column; gap: 12px; }
+        h1 { font-size: 1.8rem; margin: 10px 0 5px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); }
+        .description { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 30px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        
+        /* --- Yılan Gibi Dönen LED Baloncuklar --- */
+        .links-container { display: flex; flex-direction: column; gap: 15px; }
+        
         .link-card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 100px; padding: 14px 22px;
-            display: flex; align-items: center; text-decoration: none; color: white;
-            backdrop-filter: blur(8px); transition: all 0.3s ease;
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 100px;
+            padding: 14px 22px;
+            display: flex; align-items: center;
+            text-decoration: none; color: white;
+            overflow: hidden;
+            backdrop-filter: blur(3px);
+            transition: all 0.3s ease;
+            z-index: 1;
         }
         .link-card:active { transform: scale(0.97); }
-        .link-card i { font-size: 1.2rem; width: 28px; margin-right: 12px; }
-        .link-text { flex-grow: 1; font-size: 0.95rem; text-align: left; }
+
+        /* Baloncuğun etrafında dönen beyaz ışık (Yılan) */
+        .link-card::before {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, rgba(255, 255, 255, 0.8));
+            animation: rotate-led 4s linear infinite;
+            z-index: -2;
+        }
+
+        /* İç saydam maske - Arka planı kapatmasın diye */
+        .link-card::after {
+            content: "";
+            position: absolute;
+            inset: 1px;
+            background: rgba(0, 0, 0, 0.25); 
+            border-radius: 100px;
+            z-index: -1;
+        }
+
+        @keyframes rotate-led { 100% { transform: rotate(360deg); } }
+
+        .link-card i { font-size: 1.2rem; width: 28px; margin-right: 12px; z-index: 2; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
+        .link-text { flex-grow: 1; font-size: 0.95rem; text-align: left; z-index: 2; font-weight: 500; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
         
-        .footer-section { margin-top: 40px; position: relative; z-index: 2; }
-        .footer-quote { font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); font-style: italic; margin-bottom: 15px; }
+        /* --- Footer Alanı --- */
+        .footer-section { margin-top: 40px; position: relative; z-index: 20; }
+        .footer-quote { font-size: 0.9rem; color: rgba(255, 255, 255, 0.8); font-style: italic; margin-bottom: 15px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
         .memory-img {
             width: 100px; height: 100px; border-radius: 15px;
-            object-fit: cover; border: 1px solid rgba(255,255,255,0.2);
-            margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            object-fit: cover; border: 1px solid rgba(255,255,255,0.3);
+            margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
         .music-btn {
-            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
             color: white; border-radius: 50px; padding: 10px 20px;
             cursor: pointer; backdrop-filter: blur(5px); font-size: 0.85rem;
             transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
-        .music-btn:hover { background: rgba(255,255,255,0.25); }
+        .music-btn:hover { background: rgba(255,255,255,0.2); }
 
-        /* --- Kar & Yıldız Efektleri --- */
+        /* --- Kar & Yıldız Efektleri (Z-index düzeltildi) --- */
         .snowflake, .star, .shooting-star { position: fixed; pointer-events: none; z-index: 0; user-select: none; }
         .snowflake { color: #fff; font-size: 1.2em; top: -10%; animation: snowflakes-fall 10s linear infinite, snowflakes-shake 3s ease-in-out infinite; }
         .star { background: #fff; border-radius: 50%; opacity: 0; animation: twinkle 5s infinite ease-in-out alternate; }
